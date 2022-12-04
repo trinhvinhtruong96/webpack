@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { time } = require('console');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   mode: 'development',
@@ -33,7 +33,7 @@ module.exports = {
           'css-loader',
           'sass-loader'
         ]
-      }, 
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -50,9 +50,12 @@ module.exports = {
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({
-    title: 'Webpack App',
-    filename: 'index.html',
-    template: 'src/template.html'
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Webpack App',
+      filename: 'index.html',
+      template: 'src/template.html'
+    }),
+    new BundleAnalyzerPlugin()
+  ],
 }

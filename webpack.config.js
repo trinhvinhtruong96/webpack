@@ -1,4 +1,6 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { time } = require('console');
 
 module.exports = {
   mode: 'development',
@@ -7,7 +9,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
+    filename: '[name].[contenthash].js',
   },
   module: {
     rules: [
@@ -20,5 +22,10 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [new HtmlWebpackPlugin({
+    title: 'Webpack App',
+    filename: 'index.html',
+    template: 'src/template.html'
+  })],
 }
